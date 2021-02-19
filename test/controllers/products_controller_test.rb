@@ -55,7 +55,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
           description: @product.description,
           image_url: @product.image_url,
           price: @product.price,
-          title: @title,
+          title: @title
         }
       }
 
@@ -69,5 +69,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to products_url
+  end
+
+  test "number of products" do
+    get products_url
+    assert_select 'table tbody td.description', minimum: 3
   end
 end
