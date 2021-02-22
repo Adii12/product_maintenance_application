@@ -8,6 +8,6 @@ module CurrentCart
     logger.debug "CART ID #{@cart}"
   rescue ActiveRecord::RecordNotFound
     @cart = Cart.create
-    session[:cart_id] = @cart_id
+    session[:cart_id] = @cart.id
   end
 end
