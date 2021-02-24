@@ -28,7 +28,6 @@ class OrdersController < ApplicationController
     @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
-      byebug
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
