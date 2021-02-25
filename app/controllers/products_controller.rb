@@ -1,4 +1,6 @@
+
 class ProductsController < ApplicationController
+  include ActiveModel::Serializers::Xml
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
@@ -63,6 +65,7 @@ class ProductsController < ApplicationController
     if stale?(@latest_order)
       respond_to do |format|
         format.atom
+        format.json { render json: @product.to_json }
       end
     end
   end
