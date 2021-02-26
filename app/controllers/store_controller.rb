@@ -6,8 +6,12 @@ class StoreController < ApplicationController
   
 
   def index
-    @products = Product.order(:title)
-    @count = session[:counter]
+    if params[:set_locale]
+      redirect_to store_index_url(locale: params[:set_locale])
+    else
+      @products = Product.order(:title)
+      @count = session[:counter]
+    end
   end
 
   def count_index_visits

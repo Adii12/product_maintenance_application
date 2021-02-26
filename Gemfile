@@ -24,6 +24,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'react-rails'
 
+gem 'i18n-js'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

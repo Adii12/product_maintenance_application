@@ -10,6 +10,14 @@
 
   <body>
     <header class="main">
+      <aside>
+        <%= form_tag store_index_path, class: 'locale' do %>
+          <%= select_tag 'set_locale',
+              options_for_select(LANGUAGES, I18n.locale.to_s)
+               %>
+          <%= submit_tag 'submit'%>
+          <% end %>
+      </aside>
       <%= image_tag 'logo.svg', alt: 'The Pragmatic Bookshelf' %>
       <h1><%= @page_title %></h1>
     </header>
@@ -18,14 +26,14 @@
         <% if @cart %>
 
         <div id="cart" class="carts">
-          <%= render @cart %>
+          <%= render_if @cart && @cart.line_items.any?, @cart %>
         </div>
         <% end %>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/questions">Questions</a></li>
-          <li><a href="/news">News</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="/"><%= t('.home') %></a></li>
+          <li><a href="/questions"><%= t('.questions') %></a></li>
+          <li><a href="/news"><%= t('.news') %></a></li>
+          <li><a href="/contact"><%= t('.contact') %></a></li>
         </ul>
 
         <% if session[:user_id] %>
@@ -54,4 +62,11 @@
 </html>
 
 <%= javascript_pack_tag 'application' %>
+<%= javascript_include_tag "i18n" %>
+<%= javascript_include_tag "translations", skip_pipeline: true %>
+
+<script type="text/javascript">
+  I18n.defaultLocale = "<%= I18n.default_locale %>"
+  I18n.locale = "<%= I18n.locale %>"
+</script>
 
